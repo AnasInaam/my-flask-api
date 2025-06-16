@@ -1,90 +1,37 @@
 # Flask API Documentation
 
-This README file provides information about the Flask API for the fullstack application. It includes instructions on how to set up and run the Flask server, as well as details about the available APIs.
+This Flask API provides 5 endpoints for text and number operations. CORS is enabled for frontend integration.
 
-## Project Structure
+## Setup
 
-```
-flask-api/
-├── app.py                # Main entry point for the Flask application
-├── requirements.txt      # List of dependencies for the Flask application
-└── apis/                 # Directory containing API implementations
-    ├── word_count.py     # Word Count API
-    ├── number_addition.py # Number Addition API
-    ├── api3.py           # String Reversal API
-    ├── api4.py           # Temperature Conversion API
-    └── api5.py           # Palindrome Check API
-```
-
-## Setup Instructions
-
-1. **Clone the repository:**
-   ```
-   git clone <repository-url>
-   cd my-fullstack-app/flask-api
-   ```
-
-2. **Create a virtual environment (optional but recommended):**
-   ```
-   python -m venv venv
-   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-   ```
-
-3. **Install the required packages:**
-   ```
-   pip install -r requirements.txt
-   ```
-
-## Running the Flask Application
-
-To start the Flask server, run the following command:
-
-```
+```sh
+cd flask-api
+python -m venv venv
+# On Windows: venv\Scripts\activate
+# On Mac/Linux: source venv/bin/activate
+pip install -r requirements.txt
 python app.py
 ```
 
-The server will start on `http://127.0.0.1:5000/` by default.
+## Endpoints & Example Usage
 
-## Available APIs
+All endpoints: `POST` with JSON `{ "input": "..." }`
 
-1. **Word Count API**
-   - **Endpoint:** `/api/word_count`
-   - **Method:** POST
-   - **Request Body:** JSON with a key `text` containing the string to count words.
-   - **Response:** JSON with the word count.
+| Endpoint                  | Example Input                | Description                        |
+|--------------------------|------------------------------|------------------------------------|
+| `/word_count`            | `This is a test sentence`    | Returns word count                 |
+| `/number_addition`       | `1 2 3.5 4`                  | Returns sum of numbers             |
+| `/string_reversal`       | `hello world`                | Returns reversed string            |
+| `/temperature_conversion`| `100 C` or `212 F`           | Converts between C and F           |
+| `/palindrome_check`      | `racecar`                    | Checks if input is a palindrome    |
 
-2. **Number Addition API**
-   - **Endpoint:** `/api/number_addition`
-   - **Method:** POST
-   - **Request Body:** JSON with keys `num1` and `num2` containing the numbers to add.
-   - **Response:** JSON with the sum.
-
-3. **String Reversal API**
-   - **Endpoint:** `/api/reverse_string`
-   - **Method:** POST
-   - **Request Body:** JSON with a key `string` containing the string to reverse.
-   - **Response:** JSON with the reversed string.
-
-4. **Temperature Conversion API**
-   - **Endpoint:** `/api/convert_temperature`
-   - **Method:** POST
-   - **Request Body:** JSON with a key `celsius` containing the temperature in Celsius.
-   - **Response:** JSON with the temperature in Fahrenheit.
-
-5. **Palindrome Check API**
-   - **Endpoint:** `/api/check_palindrome`
-   - **Method:** POST
-   - **Request Body:** JSON with a key `string` containing the string to check.
-   - **Response:** JSON indicating whether the string is a palindrome.
-
-## Testing the APIs
-
-You can test the APIs using tools like Postman or curl. Make sure to set the request method and headers appropriately.
+### Example curl
+```sh
+curl -X POST http://127.0.0.1:5000/word_count -H "Content-Type: application/json" -d '{"input": "This is a test"}'
+```
 
 ## Deployment
-
-For deployment, you can use platforms like Render for the Flask API. Follow the respective platform's documentation for deployment instructions.
+- Deploy to [Render](https://render.com/) for production use.
 
 ## License
-
-This project is licensed under the MIT License. See the LICENSE file for more details.
+MIT
